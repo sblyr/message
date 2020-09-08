@@ -2205,10 +2205,10 @@
   resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.3.tgz#5405ee8e444ed212db44e79351f0c70a582aae25"
   integrity sha512-DetpxZw1fzPD5xUBrIAoplLChO2VB8DlL5Gg+I1IR9b2wPqYIca2WSUxL5g1vLeR4MsQq1NeWriXAVffV+U1Fw==
 
-"@sublayer/passport-components@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@sublayer/passport-components/-/passport-components-1.0.3.tgz#b99df8db2e520fb4046ba4a8a294f2819d152f45"
-  integrity sha512-lU7VlbCUbN+0gdgyzim4VkCoTQmIyprlK1i2/Fm+oA+rsc5aKHF6htVASKVXBt3coNL2JmjtUL8w29i/70pR9A==
+"@sublayer/passport-components@1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@sublayer/passport-components/-/passport-components-1.0.4.tgz#a84000bc642ec25da4afa4b93fc8645e1c81479a"
+  integrity sha512-kVoXyKTLXZs0/KwwPbJIpZWCVQTDQ7AlbwIVPV9+cJGZ+SIpK00ttWNWJ5p7lYf7yr7BdCNXHUWwolfwidNmMQ==
   dependencies:
     axios "^0.19.2"
     debug "^4.1.1"

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@sublayer/passport-components": "^1.0.3",
+    "@sublayer/passport-components": "1.0.4",
     "@sublayer/ui": "^1.1.4",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",

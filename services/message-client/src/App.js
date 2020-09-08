@@ -17,7 +17,11 @@ class App extends React.Component {
 
     return (
       <Provider store={store}>
-        <Passport>
+        <Passport
+          clientUrl={window._env_.REACT_APP_SUBLAYER_PASSPORT_CLIENT_URL}
+          clientId={window._env_.REACT_APP_SUBLAYER_PASSPORT_CLIENT_ID}
+          redirectUrl={window._env_.REACT_APP_CLIENT_URL}
+        >
           {session ? (
             <FetchSchema>
               <Router>
