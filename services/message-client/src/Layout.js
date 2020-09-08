@@ -59,7 +59,7 @@ class Layout extends React.Component {
                             imageFitTypeId={'cover'}
                             imageUrl={window._env_.REACT_APP_BRAND_IMAGE_URL}
                             title={window._env_.REACT_APP_TITLE}
-                            description={process._env_.REACT_APP_VERSION}
+                            description={window._env_.REACT_APP_VERSION}
                             />
                         <MenuContainer>
                             <Menu>
