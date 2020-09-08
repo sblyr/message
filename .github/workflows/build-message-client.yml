@@ -1,0 +1,25 @@
+name: Build Message Client
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  build-message-client:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set environment variables
+        id: vars
+        run: |
+          echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
+          echo ::set-output name=releaseDate::$(date -u +"%FT%T.000Z")
+      - name: Build the Docker image
+        working-directory: ./services/message-client
+        run: docker build . --file Dockerfile-prod --tag sublayer/message-client:${{ steps.vars.outputs.tag }}
+      - name: Login into Gitlab Docker Registry
+        run: docker login -u sublayer -p ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push image to Gitlab Docker Registry
+        run: docker push sublayer/message-client:${{ steps.vars.outputs.tag }}

@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+
+  message-db:
+    build: ./services/message-db
+    ports:
+      - 9097:3306
+    restart: always
+    volumes:
+      - ./services/message-db/data:/var/lib/mysql:delegated
+      - ./services/message-db/conf-files/my.cnf:/etc/alternatives/my.cnf
+    environment:
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_ROOT_PASSWORD: root
+
+  message-api:
+    image: node:10
+    env_file:
+      - ./environment/message-api.development.env
+    environment:
+      - PORT=3000
+    working_dir: /app
+    volumes:
+      - ./services/message-api:/app
+    ports:
+      - 5011:3000
+    command: ./entrypoint.sh
+    depends_on:
+      - message-db
+
+  message-client:
+    build: ./services/message-client
+    stdin_open: true
+    env_file:
+      - ./environment/message-client.development.env
+    environment:
+      - PORT=3000
+    working_dir: /app
+    volumes:
+      - ./services/message-client:/app
+    ports:
+      - 5012:3000
+    command: ./entrypoint.sh
+
+  scripts:
+    build: ./services/scripts
+    volumes:
+      - ./services/scripts/src:/srv
+      - ./environment:/environment
+
+  proxy:
+    build: ./services/proxy
+    ports:
+      - 80:80
+    restart: always
+    

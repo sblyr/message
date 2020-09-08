@@ -1,0 +1,72 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Lato", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+:root {
+    --white: #fff;
+    --black: #000;
+    --gray: #757575;
+    --grayLighter: #bdbdbd;
+    --grayLightest: #eee;
+    --grayDarker: #545454;
+    --grayDarkest: #212121;
+    --red: #ff5635;
+    --redLighter: #fba67f;
+    --redDarker: #d02f20;
+    --primaryColor: 227, 79, 134;
+    --primaryColorLighter: 235, 131, 170;
+    --primaryColorLightest: 243, 181, 204;
+    --primaryColorDarker: 158, 25, 74;
+    --primaryColorDarkest: 65, 10, 31;
+    --primaryColorAlpha: 1;
+    --primaryColorLighterAlpha: 1;
+    --primaryColorLightestAlpha: 1;
+    --primaryColorDarkerAlpha: 1;
+    --primaryColorDarkestAlpha: 1;
+    --secondaryColor: 255, 255, 255;
+    --secondaryColorLighter: 255, 255, 255;
+    --secondaryColorLightest: 255, 255, 255;
+    --secondaryColorDarker: 153, 153, 153;
+    --secondaryColorDarkest: 64, 64, 64;
+    --secondaryColorAlpha: 1;
+    --secondaryColorLighterAlpha: 1;
+    --secondaryColorLightestAlpha: 1;
+    --secondaryColorDarkerAlpha: 1;
+    --secondaryColorDarkestAlpha: 1;
+    --tertiaryColor: 0, 0, 0;
+    --tertiaryColorLighter: 102, 102, 102;
+    --tertiaryColorLightest: 191, 191, 191;
+    --tertiaryColorDarker: 0, 0, 0;
+    --tertiaryColorDarkest: 0, 0, 0;
+    --tertiaryColorAlpha: 1;
+    --tertiaryColorLighterAlpha: 1;
+    --tertiaryColorLightestAlpha: 1;
+    --tertiaryColorDarkerAlpha: 1;
+    --tertiaryColorDarkestAlpha: 1;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji;
+}
+
+.h1, .h2, h1, h2 {
+    line-height: 150%;
+    font-weight: 700;
+}
+
+.h1, h1 {
+    font-size: 34px;
+    margin: 0 0 24px 0;
+}

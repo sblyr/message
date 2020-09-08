@@ -1,0 +1,55 @@
+FROM node:10 as build
+
+RUN apt-get update
+
+# for envsubst command
+RUN apt-get install gettext -y
+
+# WORKDIR specifies the directory our
+# application's code will live within
+WORKDIR /app
+
+# We copy our package.json file to our
+# app directory
+COPY package.json /app
+
+# We then run npm install to install
+# the npm dependencies for our application
+RUN yarn install
+
+# We then copy the rest of our application
+# To the app directory
+COPY . /app
+
+RUN cp ./public/index.template.html ./public/index.html
+
+# We start our application by calling
+# npm start
+RUN yarn build
+
+# We move the build application
+# to an nginx build
+FROM nginx:1.16.0-alpine
+
+COPY --from=build /app/build /usr/share/nginx/html
+
+RUN rm /etc/nginx/conf.d/default.conf
+
+COPY nginx/nginx.conf /etc/nginx/conf.d
+
+EXPOSE 80
+
+# Copy .env file and shell script to container
+WORKDIR /usr/share/nginx/html
+COPY ./env.sh .
+COPY ./prestart-prod.sh .
+COPY .env .
+
+# Add bash
+RUN apk add --no-cache bash
+
+# Make our shell script executable
+RUN chmod +x prestart-prod.sh
+
+# Start Nginx server
+CMD ["/bin/bash", "-c", "/usr/share/nginx/html/prestart-prod.sh && nginx -g \"daemon off;\""]
