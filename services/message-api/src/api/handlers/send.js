@@ -25,9 +25,7 @@ const extractTokenFromHeaders = (headers) => {
     return parts[1]
 }
 
-module.exports = ctx => async ({ template, channel: channelType, applicationId, attention, to, payload, attachments = [] }) => {
-
-    const id = uuid.v4()
+module.exports = ctx => async ({ template, channel: channelType, to = [], cc = [], bcc = [], payload, attachments = [] }) => {
 
     const token = extractTokenFromHeaders(ctx.req.headers)
 
@@ -73,39 +71,60 @@ module.exports = ctx => async ({ template, channel: channelType, applicationId, 
 
     const { subject, body } = response.data.data
 
-    const message = {
-        id,
-        applicationId,
-        channel: channel.id,
-        subject,
-        attention,
-        to,
-        template,
-        payload,
-        body,
-        muted: false,
-        confirmed: false,
-        sent: false,
-        openCount: 0,
-        clickCount: 0,
-        bounced: 0,
-        createdAt: new Date()
-    }
+    const recipients = [
+        ...to.map(({ name, email }) => ({ name, email, type: 'to' })),
+        ...cc.map(({ name, email }) => ({ name, email, type: 'cc' })),
+        ...bcc.map(({ name, email }) => ({ name, email, type: 'bcc' })),
+    ]
+
+    const contextId = uuid.v4()
+
+    const messages = await Promise.all(
+        recipients.map(async recipient => {
+
+            const message = {
+                id: uuid.v4(),
+                applicationId: application.id,
+                channel: channel.id,
+                subject,
+                contextId,
+                attention: recipient.name,
+                to: recipient.email,
+                template,
+                payload,
+                body,
+                muted: false,
+                confirmed: false,
+                sent: false,
+                openCount: 0,
+                clickCount: 0,
+                bounced: 0,
+                createdAt: new Date()
+            }
+
+            const data = {
+                ...message
+            }
+        
+            data.payload = JSON.stringify(data.payload, null, 2)
+        
+            await ctx.db.query('INSERT INTO messages SET ?', data)
+
+            return message
+        })
+    )
 
     await channelAdapter.send({
-        ...message,
+        id: contextId,
+        to,
+        cc,
+        bcc,
+        subject,
+        body,
         attachments
     })
 
-    const data = {
-        ...message
-    }
-
-    data.payload = JSON.stringify(data.payload, null, 2)
-
-    await ctx.db.query('INSERT INTO messages SET ?', data)
-
     return {
-        message
+        messages
     }
 }

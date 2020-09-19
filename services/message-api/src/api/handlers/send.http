@@ -5,8 +5,24 @@ Authorization: Bearer 10f37828-cf89-11ea-ab34-0242ac140004
 
 {
     "channel": "email",
-    "attention": "Olivier",
-    "to": "info@sublayer.io",
+    "to": [
+        {
+            "name": "Olivier",
+            "email": "info@sublayer.io"
+        }
+    ],
+    "cc": [
+        {
+            "name": "Olivier",
+            "email": "info@sublayer.io"
+        }
+    ],
+    "bcc": [
+        {
+            "name": "Olivier",
+            "email": "info@sublayer.io"
+        }
+    ],
     "template": "QuoteProposal",
     "payload": {
         "attention": "Olivier"
