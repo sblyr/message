@@ -44,7 +44,7 @@ module.exports = (ctx) => {
                 CustomID: id,
                 From: {
                     Email: ctx.channel.config.MAILJET_API_FROM_EMAIL,
-                    Name: from ? from : ctx.channel.config.MAILJET_API_FROM_NAME
+                    Name: from ? from.name : ctx.channel.config.MAILJET_API_FROM_NAME
                 },
                 Subject: subject,
                 TextPart: 'text part',
