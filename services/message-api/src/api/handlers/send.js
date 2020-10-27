@@ -25,7 +25,7 @@ const extractTokenFromHeaders = (headers) => {
     return parts[1]
 }
 
-module.exports = ctx => async ({ template, channel: channelType, to = [], cc = [], bcc = [], payload, attachments = [] }) => {
+module.exports = ctx => async ({ from, template, channel: channelType, to = [], cc = [], bcc = [], payload, attachments = [] }) => {
 
     const token = extractTokenFromHeaders(ctx.req.headers)
 
@@ -88,6 +88,7 @@ module.exports = ctx => async ({ template, channel: channelType, to = [], cc = [
                 channel: channel.id,
                 subject,
                 contextId,
+                from,
                 attention: recipient.name,
                 to: recipient.email,
                 template,
@@ -116,6 +117,7 @@ module.exports = ctx => async ({ template, channel: channelType, to = [], cc = [
 
     await channelAdapter.send({
         id: contextId,
+        from,
         to,
         cc,
         bcc,

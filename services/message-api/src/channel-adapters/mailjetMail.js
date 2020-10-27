@@ -11,7 +11,7 @@ module.exports = (ctx) => {
     })
 
     return {
-        send: async ({ id, to, bcc, cc, subject, body, attachments }) => {
+        send: async ({ id, from, to, bcc, cc, subject, body, attachments }) => {
 
             const Attachments = await Promise.all(
                 attachments.map(async attachment => {
@@ -44,7 +44,7 @@ module.exports = (ctx) => {
                 CustomID: id,
                 From: {
                     Email: ctx.channel.config.MAILJET_API_FROM_EMAIL,
-                    Name: ctx.channel.config.MAILJET_API_FROM_NAME
+                    Name: from ? from : ctx.channel.config.MAILJET_API_FROM_NAME
                 },
                 Subject: subject,
                 TextPart: 'text part',
