@@ -87,7 +87,7 @@ module.exports = (ctx) => {
                     ]
                 }
             })
-
+            
             const response = fullResponse.data.Messages[0]
 
             return response

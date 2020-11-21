@@ -25,7 +25,7 @@ const extractTokenFromHeaders = (headers) => {
     return parts[1]
 }
 
-module.exports = ctx => async ({ from, template, channel: channelType, to = [], cc = [], bcc = [], payload, attachments = [] }) => {
+module.exports = ctx => async ({ from, subject, body, template, channel: channelType, to = [], cc = [], bcc = [], payload, attachments = [] }) => {
 
     const token = extractTokenFromHeaders(ctx.req.headers)
 
@@ -56,20 +56,27 @@ module.exports = ctx => async ({ from, template, channel: channelType, to = [], 
         }
     })
 
-    const response = await axios.request({
-        method: 'post',
-        url: process.env.DEFAULT_TEMPLATE_RENDER_API_URL,
-        data: {
-            template,
-            payload
+    if (template) {
+
+        const response = await axios.request({
+            method: 'post',
+            url: process.env.DEFAULT_TEMPLATE_RENDER_API_URL,
+            data: {
+                template,
+                payload
+            }
+        })
+
+        if (response.data.status === "error") {
+            throw new Error(`could not render template: ${response.data.message}`)
         }
-    })
 
-    if (response.data.status === "error") {
-        throw new Error(`could not render template: ${response.data.message}`)
+        body = response.data.data.body
+
+        if (!subject) {
+            subject = response.data.data.subject
+        }
     }
-
-    const { subject, body } = response.data.data
 
     const recipients = [
         ...to.map(({ name, email }) => ({ name, email, type: 'to' })),
@@ -106,9 +113,9 @@ module.exports = ctx => async ({ from, template, channel: channelType, to = [], 
             const data = {
                 ...message
             }
-        
+
             data.payload = JSON.stringify(data.payload, null, 2)
-        
+
             await ctx.db.query('INSERT INTO messages SET ?', data)
 
             return message

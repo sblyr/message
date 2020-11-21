@@ -36,3 +36,43 @@ Authorization: Bearer 10f37828-cf89-11ea-ab34-0242ac140004
         }
     ]
 }
+
+### Send Email
+POST http://0.0.0.0:5011/v0/send
+Content-Type: application/json
+Authorization: Bearer 10f37828-cf89-11ea-ab34-0242ac140004
+
+{
+    "channel": "email",
+    "to": [
+        {
+            "name": "Olivier",
+            "email": "info@sublayer.io"
+        }
+    ],
+    "cc": [
+        {
+            "name": "Olivier",
+            "email": "info@sublayer.io"
+        }
+    ],
+    "bcc": [
+        {
+            "name": "Olivier",
+            "email": "info@sublayer.io"
+        }
+    ],
+    "subject": "Quote proposal",
+    "body": "<h1>This works too</h1><p>Lorem ipsum dolor simet</p>",
+    "payload": {
+        "attention": "Olivier"
+    },
+    "attachments": [
+        {
+            "contentType": "application/pdf",
+            "filename": "Personal Quotation",
+            "type": "url",
+            "url": "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
+        }
+    ]
+}
