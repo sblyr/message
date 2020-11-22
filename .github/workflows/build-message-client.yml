@@ -16,6 +16,9 @@ jobs:
         run: |
           echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
           echo ::set-output name=releaseDate::$(date -u +"%FT%T.000Z")
+      - name: Output build info to build-info.json
+        working-directory: ./services/message-client
+        run: VERSION=${{ steps.vars.outputs.tag }} AUTHOR=${GITHUB_ACTOR} COMMIT_HASH=${GITHUB_SHA} RELEASE_DATE=${{ steps.vars.outputs.releaseDate }} ./scripts/output-build-info.sh
       - name: Build the Docker image
         working-directory: ./services/message-client
         run: docker build . --file Dockerfile-prod --tag sublayer/message-client:${{ steps.vars.outputs.tag }}
