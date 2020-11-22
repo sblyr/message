@@ -75,7 +75,8 @@ spec:
     - id: payload
       type: json
     - id: body
-      type: html
+      type: longText
+      displayType: html
     - id: labels
       type: text
     - id: contextId

@@ -7,6 +7,7 @@ import Loader from '@sublayer/ui/lib/loader'
 // import '@sublayer/ui/lib/table/index.css'
 import './Table.css'
 import icons from './icons2'
+import hooks from './hooks'
 
 const noop = () => { }
 
@@ -111,6 +112,7 @@ class TableRoute extends React.Component {
                             modelId={this.props.modelId}
                             schema={this.props.state.toJS()}
                             data={this.state.data}
+                            hooks={hooks}
                             onPageRefresh={noop}
                             onRecordClick={this.handleRecordClick}
                         />

@@ -7,6 +7,7 @@ import ModelDetailPage from "@sublayer/ui/lib/model-detail-page";
 import Loader from "@sublayer/ui/lib/loader";
 import Content from "./Content";
 import icons from './icons2'
+import hooks from './hooks'
 
 class TableRoute extends React.Component {
     state = {
@@ -102,6 +103,7 @@ class TableRoute extends React.Component {
                                 modelDetailPage={this.props.modelDetailPage.toJS()}
                                 schema={schema}
                                 data={this.state.data}
+                                hooks={hooks}
                                 modelId={this.props.modelId}
                                 recordId={this.props.recordId}
                                 onRequest={this.handleRequest}
