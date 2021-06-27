@@ -25,7 +25,7 @@ const extractTokenFromHeaders = (headers) => {
     return parts[1]
 }
 
-module.exports = ctx => async ({ testMode = false, from, subject, body, template, channel: channelType, to = [], cc = [], bcc = [], payload, attachments = [] }) => {
+module.exports = ctx => async ({ from, subject, body, template, channel: channelType, to = [], cc = [], bcc = [], payload, attachments = [] }) => {
 
     const token = extractTokenFromHeaders(ctx.req.headers)
 
@@ -78,7 +78,7 @@ module.exports = ctx => async ({ testMode = false, from, subject, body, template
         }
     }
 
-    subject = testMode ? `[TEST MODE] ${subject}` : subject
+    subject = ctx.testMode ? `[TEST MODE] ${subject}` : subject
 
     const recipients = [
         ...to.map(({ name, email }) => ({ name, email, type: 'to' })),
@@ -93,7 +93,7 @@ module.exports = ctx => async ({ testMode = false, from, subject, body, template
 
             const message = {
                 id: uuid.v4(),
-                testMode,
+                testMode: ctx.testMode,
                 applicationId: application.id,
                 channel: channel.id,
                 subject,
@@ -127,7 +127,7 @@ module.exports = ctx => async ({ testMode = false, from, subject, body, template
 
     await channelAdapter.send({
         id: contextId,
-        testMode,
+        testMode: ctx.testMode,
         from,
         to,
         cc,

@@ -2,9 +2,9 @@
 POST http://0.0.0.0:5011/v0/send
 Content-Type: application/json
 Authorization: Bearer 10f37828-cf89-11ea-ab34-0242ac140004
+x-application-test-mode: true
 
 {
-    "testMode": true,
     "channel": "email",
     "to": [
         {
@@ -42,9 +42,9 @@ Authorization: Bearer 10f37828-cf89-11ea-ab34-0242ac140004
 POST http://0.0.0.0:5011/v0/send
 Content-Type: application/json
 Authorization: Bearer 10f37828-cf89-11ea-ab34-0242ac140004
+x-application-test-mode: true
 
 {
-    "testMode": true,
     "channel": "email",
     "to": [
         {

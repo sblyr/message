@@ -14,6 +14,8 @@ module.exports = ({ createContext }) => handler => async (req, res) => {
         req.ctx = ctx;
         ctx.req = req
 
+        ctx.testMode = req.headers['x-application-test-mode'] === "true"
+
         let args = null;
         if (req.method === "POST") {
             args = req.body;
