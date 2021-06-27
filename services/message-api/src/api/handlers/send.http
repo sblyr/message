@@ -4,6 +4,7 @@ Content-Type: application/json
 Authorization: Bearer 10f37828-cf89-11ea-ab34-0242ac140004
 
 {
+    "testMode": true,
     "channel": "email",
     "to": [
         {
@@ -43,6 +44,7 @@ Content-Type: application/json
 Authorization: Bearer 10f37828-cf89-11ea-ab34-0242ac140004
 
 {
+    "testMode": true,
     "channel": "email",
     "to": [
         {

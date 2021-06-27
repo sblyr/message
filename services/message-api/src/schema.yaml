@@ -41,6 +41,8 @@ spec:
       type: date
       settings:
         includeTime: true
+    - id: testMode
+      type: text
     - id: attention
       type: text
     - id: subject
