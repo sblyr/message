@@ -42,7 +42,7 @@ spec:
       settings:
         includeTime: true
     - id: testMode
-      type: text
+      type: boolean
     - id: attention
       type: text
     - id: subject
